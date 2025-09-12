@@ -1295,7 +1295,7 @@ struct otp_white_label_command : public cmd {
 
 
 vector<std::shared_ptr<cmd>> otp_sub_commands {
-        std::shared_ptr<cmd>( new otp_list_command()),
+        std::shared_ptr<cmd>(new otp_list_command()),
     #if HAS_LIBUSB
         std::shared_ptr<cmd>(new otp_get_command()),
         std::shared_ptr<cmd>(new otp_set_command()),
@@ -1477,7 +1477,7 @@ struct reboot_command : public cmd {
         (
             option('a', "--application").set(settings.reboot_app_specified) % "Reboot back into the application (this is the default)" +
             option('u', "--usb").set(settings.reboot_usb) % "Reboot back into BOOTSEL mode" +
-            (option('g', "--diagnostic") & integer("partition").min_value(-3).max_value(15).set(settings.reboot_diagnostic_partition)).min(0) +
+            (option('g', "--diagnostic") & integer("partition").min_value(-3).max_value(15).set(settings.reboot_diagnostic_partition)).min(0) % "Select diagnostic partition" +
             (option('c', "--cpu") & value("cpu").set(settings.switch_cpu)) % "Select arm | riscv CPU (if possible)"
         ).min(0).doc_non_optional(true) % "Reboot type" +
         device_selection % "Selecting the device to reboot";
